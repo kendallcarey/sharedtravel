@@ -1,0 +1,25 @@
+import { Component } from '@angular/core';
+import { Logger } from 'angular2-logger/core';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import * as log from '../actions/log';
+import * as fromRoot from '../reducers';
+import {PackingList} from "../models/packing-list";
+import {AddItemAction} from "../actions/packing-list";
+
+@Component({
+    selector: 'packing-list',
+    template: require('./packing-list.component.html'),
+    styles: [require('./packing-list.component.scss')]
+})
+export class PackingListComponent {
+    packingList : Observable<PackingList>;
+    constructor(private store: Store<fromRoot.State>) {
+        this.packingList = store.select(fromRoot.getPackingList);
+    }
+    addNew(item: string) {
+        console.log(item);
+        this.store.dispatch(new AddItemAction(item));
+    }
+
+}
