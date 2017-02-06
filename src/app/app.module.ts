@@ -8,6 +8,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from './app.component';
 import { reducer } from './reducers';
 import {PackingListComponent} from "./components/packing-list.component";
+import {ItemComponent} from "./components/item.component";
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import {PackingListComponent} from "./components/packing-list.component";
   ],
   declarations: [
     AppComponent,
-    PackingListComponent
+    PackingListComponent,
+    ItemComponent
   ],
   bootstrap: [AppComponent],
   providers: [LOG_LOGGER_PROVIDERS]

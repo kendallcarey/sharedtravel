@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild, ElementRef } from '@angular/core';
 import { Logger } from 'angular2-logger/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -13,13 +13,15 @@ import {AddItemAction} from "../actions/packing-list";
     styles: [require('./packing-list.component.scss')]
 })
 export class PackingListComponent {
-    packingList : Observable<PackingList>;
+    @ViewChild('newitem') newItem: ElementRef;
+    packingList$ : Observable<PackingList>;
     constructor(private store: Store<fromRoot.State>) {
-        this.packingList = store.select(fromRoot.getPackingList);
+        this.packingList$ = store.select(fromRoot.getPackingList);
     }
     addNew(item: string) {
         console.log(item);
         this.store.dispatch(new AddItemAction(item));
+        this.newItem.nativeElement.value = '';
     }
 
 }
