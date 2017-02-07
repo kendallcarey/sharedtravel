@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input,ViewChild, ElementRef } from '@angular/core';
 import { Logger } from 'angular2-logger/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as log from '../actions/log';
 import * as fromRoot from '../reducers';
 import {PackingList} from "../models/packing-list";
-import {AddItemAction} from "../actions/packing-list";
+import {AddItemAction, ItemCompletedAction} from "../actions/packing-list";
 import {Item} from "../models/item";
 
 @Component({
@@ -14,8 +14,15 @@ import {Item} from "../models/item";
     styles: [require('./item.component.scss')]
 })
 export class ItemComponent {
-    item$ : Observable<Item>;
-    // constructor(private store: Store<fromRoot.State>) {
-    //     this.item = store.select(fromRoot.getPackingList);
-    // }
+    @Input()
+    item:Item;
+    @ViewChild('itemCheckbox') itemCheckbox: ElementRef;
+
+    constructor(private store: Store<fromRoot.State>) {
+        // this.item = store.select(fromRoot.getPackingList);
+    }
+
+    statusComplete(item: Item) {
+        this.store.dispatch(new ItemCompletedAction(item));
+    }
 }

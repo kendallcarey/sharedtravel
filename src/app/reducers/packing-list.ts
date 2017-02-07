@@ -29,6 +29,21 @@ export function reducer(state = initialState, action: packingList.Actions): Stat
                     ]
                 }
             };
+        case packingList.ActionTypes.ITEM_COMPLETED:
+            let completedItem: Item = action.payload;
+            let newItems = state.packingList.items.map(item=>{
+                if(item.id == completedItem.id) {
+                    return Object.assign({}, completedItem, {completed: !item.completed})
+                } else {
+                    return item;
+                }
+            });
+            console.log(newItems);
+            return {
+                packingList: {
+                    items: newItems
+                }
+            };
         default:
             return state;
     }

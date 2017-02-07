@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { type } from '../util';
+import {Item} from "../models/item";
 
 /**
  * For each action type in an action group, make a simple
@@ -11,6 +12,7 @@ import { type } from '../util';
  */
 export const ActionTypes = {
     ADD_ITEM:  type('[Packing-List] Add Item'),
+    ITEM_COMPLETED: type('[Packing-List] Completed Item'),
 };
 
 /**
@@ -26,6 +28,12 @@ export class AddItemAction implements Action {
     constructor(public payload: string) { }
 }
 
+export class ItemCompletedAction implements Action {
+    type = ActionTypes.ITEM_COMPLETED;
+
+    constructor(public payload:Item) { }
+}
+
 
 
 /**
@@ -34,3 +42,4 @@ export class AddItemAction implements Action {
  */
 export type Actions
     = AddItemAction
+    |  ItemCompletedAction

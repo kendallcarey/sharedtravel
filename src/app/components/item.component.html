@@ -1,1 +1,4 @@
-<p #item>{{ item.name }}</p>
+<p #eachItem *ngIf="item">
+    <input type="checkbox" #itemCheckbox (change)="statusComplete(item)" [checked]="item.completed" />
+    {{ item.name }}
+</p>

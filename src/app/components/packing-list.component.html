@@ -1,7 +1,4 @@
 <input type="text" class="packing-list-input" placeholder="Type Item" #newitem (keydown.enter)="addNew(newitem.value)">
-<ul>
-    <li *ngFor="let item of (packingList$ | async)?.items">
-        <p>{{ item.name }}</p>
-        <!--<item [item]="item"></item>-->
-    </li>
-</ul>
+<div  *ngFor="let item of (packingList$ | async)?.items">
+        <item [item]="item"></item>
+</div>
