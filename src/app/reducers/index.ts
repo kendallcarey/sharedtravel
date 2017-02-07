@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { ActionReducer } from '@ngrx/store';
+import { localStorageSync } from 'ngrx-store-localstorage';
 import * as fromRouter from '@ngrx/router-store';
 // import { environment } from '../../environments/environment';
 
@@ -61,8 +62,15 @@ const reducers = {
   packingList: fromPackingList.reducer,
 };
 
-const developmentReducer: ActionReducer<State> = compose(storeFreeze, combineReducers)(reducers);
-const productionReducer: ActionReducer<State> = combineReducers(reducers);
+const developmentReducer: ActionReducer<State> = compose(
+    storeFreeze,
+    localStorageSync(['packingList'], true),
+    combineReducers
+)(reducers);
+const productionReducer: ActionReducer<State> = compose(
+    localStorageSync(['packingList'], true),
+    combineReducers
+)(reducers);
 
 export function reducer(state: any, action: any) {
   if (process.env.ENV == 'production') {

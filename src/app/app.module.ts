@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LOG_LOGGER_PROVIDERS } from 'angular2-logger/core';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule, combineReducers } from '@ngrx/store';
+import { getPackingList } from './reducers';
+import { compose } from '@ngrx/core/compose';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
@@ -13,7 +15,9 @@ import {ItemComponent} from "./components/item.component";
 @NgModule({
   imports: [
     BrowserModule,
-    StoreModule.provideStore(reducer),
+    StoreModule.provideStore(
+        reducer
+    ),
 
     /**
      * Store devtools instrument the store retaining past versions of state
