@@ -38,10 +38,24 @@ export function reducer(state = initialState, action: packingList.Actions): Stat
                     return item;
                 }
             });
-            console.log(newItems);
             return {
                 packingList: {
                     items: newItems
+                }
+            };
+        case packingList.ActionTypes.EDIT_ITEM:
+            let newName: string = action.payload.newName;
+            let oldItem: Item = action.payload.oldItem;
+            let allItems = state.packingList.items.map(item=>{
+               if(item.id == oldItem.id) {
+                   return Object.assign({}, oldItem, {name: newName})
+               } else {
+                   return item;
+               }
+            });
+            return {
+                packingList: {
+                    items: allItems
                 }
             };
         default:

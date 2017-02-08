@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as log from '../actions/log';
 import * as fromRoot from '../reducers';
 import {PackingList} from "../models/packing-list";
-import {AddItemAction, ItemCompletedAction} from "../actions/packing-list";
+import {AddItemAction, ItemCompletedAction, EditItemAction} from "../actions/packing-list";
 import {Item} from "../models/item";
 
 @Component({
@@ -17,6 +17,7 @@ export class ItemComponent {
     @Input()
     item:Item;
     @ViewChild('itemCheckbox') itemCheckbox: ElementRef;
+    edit:boolean = false;
 
     constructor(private store: Store<fromRoot.State>) {
         // this.item = store.select(fromRoot.getPackingList);
@@ -24,5 +25,12 @@ export class ItemComponent {
 
     statusComplete(item: Item) {
         this.store.dispatch(new ItemCompletedAction(item));
+    }
+
+    editItem(item: Item) {
+        this.edit = !this.edit;
+    }
+    makeChanges(item:string) {
+        this.store.dispatch(new EditItemAction({newName:item, oldItem:this.item}));
     }
 }
