@@ -13,7 +13,8 @@ import {Item} from "../models/item";
 export const ActionTypes = {
     ADD_ITEM:  type('[Packing-List] Add Item'),
     ITEM_COMPLETED: type('[Packing-List] Completed Item'),
-    EDIT_ITEM: type('[Packing-List] Edit Item')
+    EDIT_ITEM: type('[Packing-List] Edit Item'),
+    DELETE_ITEM: type('[Packing-List] Delete Item'),
 };
 
 /**
@@ -41,6 +42,11 @@ export class EditItemAction implements Action {
     constructor(public payload:{newName:string, oldItem:Item}) { }
 }
 
+export class DeleteItemAction implements Action {
+    type = ActionTypes.DELETE_ITEM;
+
+    constructor(public payload:Item) { }
+}
 
 
 /**
@@ -51,3 +57,4 @@ export type Actions
     = AddItemAction
     |  ItemCompletedAction
     |  EditItemAction
+    |  DeleteItemAction

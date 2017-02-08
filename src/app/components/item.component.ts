@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as log from '../actions/log';
 import * as fromRoot from '../reducers';
 import {PackingList} from "../models/packing-list";
-import {AddItemAction, ItemCompletedAction, EditItemAction} from "../actions/packing-list";
+import {AddItemAction, ItemCompletedAction, EditItemAction, DeleteItemAction} from "../actions/packing-list";
 import {Item} from "../models/item";
 
 @Component({
@@ -27,10 +27,13 @@ export class ItemComponent {
         this.store.dispatch(new ItemCompletedAction(item));
     }
 
-    editItem(item: Item) {
+    editItem() {
         this.edit = !this.edit;
     }
     makeChanges(item:string) {
         this.store.dispatch(new EditItemAction({newName:item, oldItem:this.item}));
+    }
+    deleteItem(item:Item) {
+        this.store.dispatch(new DeleteItemAction(item));
     }
 }
