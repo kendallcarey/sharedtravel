@@ -2,11 +2,13 @@
   font-family: VarianeScript;
   src:url(/public/fonts/work-ins-studio_variane-script/Variane_Script.woff);
 }
+
 main {
   height:100%;
   background-image: url(/public/images/vacation_flight.jpg) !important;
   background-size:cover !important;
 }
+
 .container {
   padding-top: 80px;
   min-height: 640px;
@@ -24,15 +26,12 @@ main {
     font-family: Arial;
   }
 }
-.row {
-  position: absolute;
-  top: 300px;
-  width:800px;
-  height: 560px;
-  left:-60px;
-}
+
 .packing-list {
   background:rgba(0,0,0,.5);
+  margin-top:100px;
+  padding-top:5px;
   padding-left: 30px;
-  height:100%;
+  height: 570px;
+  width:100%;
 }

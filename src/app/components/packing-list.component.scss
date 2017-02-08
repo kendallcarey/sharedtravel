@@ -9,7 +9,7 @@ input {
 .list-of-items {
   margin-top: 10px;
   height:440px;
-  overflow-y:scroll;
+  overflow-y:auto;
 }
 
 ::-webkit-scrollbar {
