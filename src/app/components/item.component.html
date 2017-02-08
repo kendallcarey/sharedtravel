@@ -1,5 +1,5 @@
 <div #eachItem *ngIf="item">
     <p *ngIf="!edit"><input type="checkbox" #itemCheckbox (change)="statusComplete(item)" [checked]="item.completed" />
     {{ item.name }} <a href="#" (click)="editItem()" >Edit</a> <a href="#" (click)="deleteItem(item)">Delete</a></p>
-    <input type="text" *ngIf="edit" (keydown.enter)="makeChanges(editedItem.value)" #editedItem [value]="item.name">
+    <input type="text" class="edit-item" *ngIf="edit" (keydown.enter)="makeChanges(editedItem.value)" #editedItem [value]="item.name">
 </div>
