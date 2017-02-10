@@ -15,6 +15,10 @@ export const ActionTypes = {
     ITEM_COMPLETED: type('[Packing-List] Completed Item'),
     EDIT_ITEM: type('[Packing-List] Edit Item'),
     DELETE_ITEM: type('[Packing-List] Delete Item'),
+    UPDATE_PACKING_LIST_CONTENTS_FAILED: type('[Packing-List] Update Failed'),
+    UPDATE_PACKING_LIST_CONTENTS_SUCCESS: type('[Packing-List] Update Success'),
+    UPDATE_PACKING_LIST: type('[Packing-List] Update Packing List'),
+    // ADD_PACKING_LIST: type('[Packing-List] Add Packing List')
 };
 
 /**
@@ -59,6 +63,22 @@ export class PackingListUpdateSuccessAction implements Action {
 
     constructor() {}
 }
+
+export class UpdatePackingListAction implements Action {
+    type = ActionTypes.UPDATE_PACKING_LIST;
+
+    constructor(public payload: Item[]) {
+
+    }
+}
+//
+// export class AddPackingListAction implements Action {
+//     type = ActionTypes.ADD_PACKING_LIST;
+//
+//     constructor() {
+//
+//     }
+// }
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
@@ -70,3 +90,5 @@ export type Actions
     |  DeleteItemAction
     |  PackingListUpdateFailedAction
     |  PackingListUpdateSuccessAction
+    |  UpdatePackingListAction
+    // |  AddPackingListAction;

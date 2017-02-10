@@ -64,11 +64,11 @@ const reducers = {
 
 const developmentReducer: ActionReducer<State> = compose(
     storeFreeze,
-    localStorageSync(['packingList'], true),
+    localStorageSync([], true),
     combineReducers
 )(reducers);
 const productionReducer: ActionReducer<State> = compose(
-    localStorageSync(['packingList'], true),
+    localStorageSync([], true),
     combineReducers
 )(reducers);
 

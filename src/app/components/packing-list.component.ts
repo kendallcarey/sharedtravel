@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import * as log from '../actions/log';
 import * as fromRoot from '../reducers';
 import {PackingList} from "../models/packing-list";
+import { PackingListService } from '../services/packing-list.service'
 import {AddItemAction} from "../actions/packing-list";
 
 @Component({
@@ -15,11 +16,10 @@ import {AddItemAction} from "../actions/packing-list";
 export class PackingListComponent {
     @ViewChild('newitem') newItem: ElementRef;
     packingList$ : Observable<PackingList>;
-    constructor(private store: Store<fromRoot.State>) {
+    constructor(private store: Store<fromRoot.State>, private packingList: PackingListService) {
         this.packingList$ = store.select(fromRoot.getPackingList);
     }
     addNew(item: string) {
-        console.log(item);
         this.store.dispatch(new AddItemAction(item));
         this.newItem.nativeElement.value = '';
     }

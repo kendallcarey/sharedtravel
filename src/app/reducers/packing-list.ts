@@ -15,18 +15,10 @@ const initialState: State = {
 
 export function reducer(state = initialState, action: packingList.Actions): State {
     switch (action.type) {
-        case packingList.ActionTypes.ADD_ITEM:
-            console.log('packingList addItem');
-            let item = new Item();
-            item.id = makeid();
-            item.name = action.payload;
-            item.completed = false;
+        case packingList.ActionTypes.UPDATE_PACKING_LIST:
             return {
                 packingList: {
-                    items: [
-                        ...state.packingList.items,
-                        item
-                    ]
+                    items: action.payload
                 }
             };
         case packingList.ActionTypes.ITEM_COMPLETED:

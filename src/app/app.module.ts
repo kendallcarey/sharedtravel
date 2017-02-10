@@ -14,6 +14,7 @@ import {PackingListComponent} from "./components/packing-list.component";
 import {ItemComponent} from "./components/item.component";
 import { EffectsModule } from '@ngrx/effects';
 import {PackingListEffects} from "./effects/packing-list";
+import {PackingListService} from "./services/packing-list.service";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBpm4T0czdn-NBqXMWiNBJnRQeOt7dHD9c",
@@ -45,9 +46,13 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     PackingListComponent,
-    ItemComponent
+    ItemComponent,
   ],
   bootstrap: [AppComponent],
-  providers: [LOG_LOGGER_PROVIDERS]
+  providers: [
+      LOG_LOGGER_PROVIDERS,
+      PackingListService
+
+  ]
 })
 export class AppModule { }

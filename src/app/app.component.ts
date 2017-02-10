@@ -16,5 +16,5 @@ interface AppState {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
+  packingList = true;
 }
