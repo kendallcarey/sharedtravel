@@ -21,13 +21,6 @@ export function reducer(state = initialState, action: packingList.Actions): Stat
                     items: action.payload
                 }
             };
-        case packingList.ActionTypes.DELETE_ITEM:
-            let deletedItem = action.payload;
-            return {
-                packingList: {
-                    items: state.packingList.items.filter(item=>item.id !== deletedItem.id)
-                }
-            };
         default:
             return state;
     }

@@ -61,4 +61,19 @@ export class PackingListEffects {
                 .catch( (res: any) => of(new packingList.PackingListUpdateFailedAction()));
         });
 
+    @Effect()
+    deleted$: Observable<Action> = this.actions$
+        .ofType(packingList.ActionTypes.DELETE_ITEM)
+        .map((action: packingList.DeleteItemAction) => action.payload)
+        .switchMap(item => {
+            if(item == null) {
+                return of(new packingList.PackingListUpdateFailedAction());
+            }
+            console.log('item: ', item)
+            return Observable.fromPromise(this.af.database.list('packingLists/myid/items/').remove(item.$key))
+                .map( (res: any) => {
+                    return new packingList.PackingListUpdateSuccessAction()
+                })
+                .catch( (res: any) => of(new packingList.PackingListUpdateFailedAction()));
+        });
 }
