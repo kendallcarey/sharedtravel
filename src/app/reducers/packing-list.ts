@@ -21,20 +21,6 @@ export function reducer(state = initialState, action: packingList.Actions): Stat
                     items: action.payload
                 }
             };
-        case packingList.ActionTypes.ITEM_COMPLETED:
-            let completedItem: Item = action.payload;
-            let newItems = state.packingList.items.map(item=>{
-                if(item.id == completedItem.id) {
-                    return Object.assign({}, completedItem, {completed: !item.completed})
-                } else {
-                    return item;
-                }
-            });
-            return {
-                packingList: {
-                    items: newItems
-                }
-            };
         case packingList.ActionTypes.EDIT_ITEM:
             let newName: string = action.payload.newName;
             let oldItem: Item = action.payload.oldItem;

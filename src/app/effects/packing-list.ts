@@ -1,18 +1,15 @@
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
 import { Action } from '@ngrx/store'
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import * as packingList from '../actions/packing-list';
+import { Item } from "../models/item";
 
 @Injectable()
 export class PackingListEffects {
     constructor(private actions$: Actions, private af: AngularFire) { }
-
-    @Effect()
-    all$: Observable<Action> = this.actions$
-        .ofType()
 
     @Effect()
     load$: Observable<Action> = this.actions$
@@ -31,17 +28,20 @@ export class PackingListEffects {
                 .catch( (res: any) => of(new packingList.PackingListUpdateFailedAction()));
         });
 
-    // @Effect()
-    // completed$: Observable<Action> = this.actions$
-    //     .ofType(packingList.ActionTypes.ITEM_COMPLETED)
-    //     .map((action: packingList.ItemCompletedAction) => action.payload)
-    //     .switchMap(query => {
-    //         if(query == null) {
-    //             return of(new packingList.PackingListUpdateFailedAction());
-    //         }
-    //         console.log('query: ',query)
-    //         return new packingList.PackingListUpdateSuccessAction();
-    //         // return Observable.fromPromise(this.af.database.list('packingLists/myid/items/')).update()
-    //     })
+    @Effect()
+    completed$: Observable<Action> = this.actions$
+        .ofType(packingList.ActionTypes.ITEM_COMPLETED)
+        .map((action: packingList.ItemCompletedAction) => action.payload)
+        .switchMap(item => {
+            if(item == null) {
+                return of(new packingList.PackingListUpdateFailedAction());
+            }
+            item = Object.assign({}, item, {completed: !item.completed})
+            return Observable.fromPromise(this.af.database.list('packingLists/myid/items/').update(item.$key, {completed: item.completed}))
+                .map( (res: any) => {
+                    return new packingList.PackingListUpdateSuccessAction()
+                })
+                .catch( (res: any) => of(new packingList.PackingListUpdateFailedAction()));
+        });
 
 }
