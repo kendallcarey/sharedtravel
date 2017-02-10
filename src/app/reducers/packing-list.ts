@@ -21,21 +21,6 @@ export function reducer(state = initialState, action: packingList.Actions): Stat
                     items: action.payload
                 }
             };
-        case packingList.ActionTypes.EDIT_ITEM:
-            let newName: string = action.payload.newName;
-            let oldItem: Item = action.payload.oldItem;
-            let allItems = state.packingList.items.map(item=>{
-               if(item.id == oldItem.id) {
-                   return Object.assign({}, oldItem, {name: newName})
-               } else {
-                   return item;
-               }
-            });
-            return {
-                packingList: {
-                    items: allItems
-                }
-            };
         case packingList.ActionTypes.DELETE_ITEM:
             let deletedItem = action.payload;
             return {

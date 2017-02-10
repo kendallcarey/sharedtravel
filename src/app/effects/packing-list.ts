@@ -44,4 +44,21 @@ export class PackingListEffects {
                 .catch( (res: any) => of(new packingList.PackingListUpdateFailedAction()));
         });
 
+    @Effect()
+    edited$: Observable<Action> = this.actions$
+        .ofType(packingList.ActionTypes.EDIT_ITEM)
+        .map((action: packingList.EditItemAction) => action.payload)
+        .switchMap(item => {
+            if(item == null) {
+                return of(new packingList.PackingListUpdateFailedAction());
+            }
+            item = Object.assign({}, item, {name: item.newName})
+            console.log('item: ', item.oldItem)
+            return Observable.fromPromise(this.af.database.list('packingLists/myid/items/').update(item.oldItem.$key, {name: item.newName}))
+                .map( (res: any) => {
+                    return new packingList.PackingListUpdateSuccessAction()
+                })
+                .catch( (res: any) => of(new packingList.PackingListUpdateFailedAction()));
+        });
+
 }
