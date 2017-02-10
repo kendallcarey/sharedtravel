@@ -10,8 +10,8 @@ import {Item} from "../models/item";
 
 @Component({
     selector: 'item',
-    template: require('./item.component.html'),
-    styles: [require('./item.component.scss')]
+    templateUrl: './item.component.html',
+    styleUrls: ['./item.component.scss']
 })
 export class ItemComponent {
     @Input()

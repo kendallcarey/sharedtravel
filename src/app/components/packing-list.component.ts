@@ -9,8 +9,8 @@ import {AddItemAction} from "../actions/packing-list";
 
 @Component({
     selector: 'packing-list',
-    template: require('./packing-list.component.html'),
-    styles: [require('./packing-list.component.scss')]
+    templateUrl: './packing-list.component.html',
+    styleUrls: ['./packing-list.component.scss']
 })
 export class PackingListComponent {
     @ViewChild('newitem') newItem: ElementRef;

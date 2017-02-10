@@ -48,7 +48,17 @@ export class DeleteItemAction implements Action {
     constructor(public payload:Item) { }
 }
 
+export class PackingListUpdateFailedAction implements Action {
+    type = ActionTypes.UPDATE_PACKING_LIST_CONTENTS_FAILED;
 
+    constructor() {}
+}
+
+export class PackingListUpdateSuccessAction implements Action {
+    type = ActionTypes.UPDATE_PACKING_LIST_CONTENTS_SUCCESS;
+
+    constructor() {}
+}
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
@@ -58,3 +68,5 @@ export type Actions
     |  ItemCompletedAction
     |  EditItemAction
     |  DeleteItemAction
+    |  PackingListUpdateFailedAction
+    |  PackingListUpdateSuccessAction

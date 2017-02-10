@@ -5,19 +5,30 @@ import { Store, StoreModule, combineReducers } from '@ngrx/store';
 import { getPackingList } from './reducers';
 import { compose } from '@ngrx/core/compose';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AngularFireModule } from 'angularfire2';
 
 
 import { AppComponent } from './app.component';
 import { reducer } from './reducers';
 import {PackingListComponent} from "./components/packing-list.component";
 import {ItemComponent} from "./components/item.component";
+import { EffectsModule } from '@ngrx/effects';
+import {PackingListEffects} from "./effects/packing-list";
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyBpm4T0czdn-NBqXMWiNBJnRQeOt7dHD9c",
+  authDomain: "share-adventure.firebaseapp.com",
+  databaseURL: "https://share-adventure.firebaseio.com",
+  storageBucket: "share-adventure.appspot.com",
+  messagingSenderId: "502666566213"
+};
 
 @NgModule({
   imports: [
     BrowserModule,
-    StoreModule.provideStore(
-        reducer
-    ),
+    AngularFireModule.initializeApp(firebaseConfig),
+    StoreModule.provideStore(reducer),
+    EffectsModule.run(PackingListEffects),
 
     /**
      * Store devtools instrument the store retaining past versions of state
