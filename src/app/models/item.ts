@@ -1,5 +1,5 @@
 export class Item {
-    id: string;
+    $key: string;
     name: string;
     completed: boolean;
 }
