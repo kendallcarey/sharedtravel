@@ -5,7 +5,7 @@ import { Store, StoreModule, combineReducers } from '@ngrx/store';
 import { getPackingList } from './reducers';
 import { compose } from '@ngrx/core/compose';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 
 
 import { AppComponent } from './app.component';
@@ -15,6 +15,7 @@ import {ItemComponent} from "./components/item.component";
 import { EffectsModule } from '@ngrx/effects';
 import {PackingListEffects} from "./effects/packing-list";
 import {PackingListService} from "./services/packing-list.service";
+import {NavbarComponent} from "./components/navbar.component";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBpm4T0czdn-NBqXMWiNBJnRQeOt7dHD9c",
@@ -23,11 +24,15 @@ export const firebaseConfig = {
   storageBucket: "share-adventure.appspot.com",
   messagingSenderId: "502666566213"
 };
+const FirebaseAuthConfig = {
+  provider: AuthProviders.Facebook,
+  method: AuthMethods.Popup
+};
 
 @NgModule({
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig, FirebaseAuthConfig),
     StoreModule.provideStore(reducer),
     EffectsModule.run(PackingListEffects),
 
@@ -47,6 +52,7 @@ export const firebaseConfig = {
     AppComponent,
     PackingListComponent,
     ItemComponent,
+    NavbarComponent
   ],
   bootstrap: [AppComponent],
   providers: [
