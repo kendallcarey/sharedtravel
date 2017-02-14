@@ -16,6 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
 import {PackingListEffects} from "./effects/packing-list";
 import {PackingListService} from "./services/packing-list.service";
 import {NavbarComponent} from "./components/navbar.component";
+import {UserEffects} from "./effects/user";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBpm4T0czdn-NBqXMWiNBJnRQeOt7dHD9c",
@@ -35,6 +36,7 @@ const FirebaseAuthConfig = {
     AngularFireModule.initializeApp(firebaseConfig, FirebaseAuthConfig),
     StoreModule.provideStore(reducer),
     EffectsModule.run(PackingListEffects),
+    EffectsModule.run(UserEffects),
 
     /**
      * Store devtools instrument the store retaining past versions of state

@@ -7,13 +7,13 @@
             <h1>Share Adventure</h1>
         </div>
         <div class="navbar-right">
-            <div *ngIf="!user.facebook">
+            <div *ngIf="!user">
                 <button md-raised-button class="btn btn-default navbar-btn" (click)="login()" >
                     <img width="30" src="http://centerlyne.com/wp-content/uploads/2016/07/logo-facebook.png" />Use My Facebook Account
                 </button>
             </div>
-            <div *ngIf="user.facebook" class="navbar-buttons">
-                <a href="#"><img [src]="this.user.facebook.photoURL" *ngIf="user.facebook.photoURL" class="fb-image"></a>
+            <div *ngIf="user" class="navbar-buttons">
+                <a href="#"><img [src]="user.facebook.photoURL"  *ngIf="this.user.facebook" class="fb-image"></a>
                 <button md-raised-button class="btn btn-default navbar-btn" (click)="logout()">
                     Logout
                 </button>

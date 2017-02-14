@@ -1,13 +1,14 @@
-import { Component,ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { AngularFire, AuthProviders } from 'angularfire2';
 import { Logger } from 'angular2-logger/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as log from '../actions/log';
 import * as fromRoot from '../reducers';
-import {PackingList} from "../models/packing-list";
+import {User} from "../models/user";
 import { PackingListService } from '../services/packing-list.service'
-import {AddItemAction} from "../actions/packing-list";
+import {LogInAction} from "../actions/user";
+import {LogOutAction} from "../actions/user";
 
 @Component({
     selector: 'navbar',
@@ -17,6 +18,7 @@ import {AddItemAction} from "../actions/packing-list";
 export class NavbarComponent {
     user = {};
     constructor(
+        private store: Store<fromRoot.State>,
         public af: AngularFire
     ) {
         this.af.auth.subscribe(user => {
@@ -27,20 +29,19 @@ export class NavbarComponent {
             }
             else {
                 // user not logged in
-                this.user = {};
+                this.user = undefined;
             }
         });
     }
 
     login() {
-        this.af.auth.login({
-            provider: AuthProviders.Facebook
-        });
+        this.store.dispatch(new LogInAction());
+        console.log(this.user);
     }
 
     logout() {
-        this.user = {};
-        this.af.auth.logout();
+        console.log('logout clicked');
+        this.store.dispatch(new LogOutAction());
         console.log(this.user);
     }
 }
