@@ -9,7 +9,7 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 
 
 import { AppComponent } from './app.component';
-import { reducer } from './reducers';
+import {reducer} from './reducers';
 import {PackingListComponent} from "./components/packing-list.component";
 import {ItemComponent} from "./components/item.component";
 import { EffectsModule } from '@ngrx/effects';

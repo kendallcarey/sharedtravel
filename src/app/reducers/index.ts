@@ -40,6 +40,7 @@ import { combineReducers } from '@ngrx/store';
  */
 
 import * as fromPackingList from './packing-list';
+import * as fromUser from './user';
 
 
 /**
@@ -48,6 +49,7 @@ import * as fromPackingList from './packing-list';
  */
 export interface State {
   packingList: fromPackingList.State;
+  user: fromUser.State;
 }
 
 
@@ -60,6 +62,7 @@ export interface State {
  */
 const reducers = {
   packingList: fromPackingList.reducer,
+  user: fromUser.reducer
 };
 
 const developmentReducer: ActionReducer<State> = compose(
@@ -85,3 +88,7 @@ export function reducer(state: any, action: any) {
 export const getPackingListState = (state: State) => state.packingList;
 
 export const getPackingList = createSelector(getPackingListState, fromPackingList.getPackingList);
+
+export const getUserState = (state: State) => state.user;
+
+export const getUser = createSelector(getUserState, fromUser.getUser);
