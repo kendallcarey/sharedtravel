@@ -16,23 +16,23 @@ import {LogOutAction} from "../actions/user";
     styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-    user:User;
+    loggedInUser:User = undefined;
     constructor(
         private store: Store<fromRoot.State>
     ) {
         this.store.select(fromRoot.getUser).subscribe(user => {
-
+            this.loggedInUser = user;
         })
     }
 
     login() {
         this.store.dispatch(new LogInAction());
-        console.log(this.user);
+        console.log(this.loggedInUser);
     }
 
     logout() {
         console.log('logout clicked');
         this.store.dispatch(new LogOutAction());
-        console.log(this.user);
+        console.log(this.loggedInUser);
     }
 }

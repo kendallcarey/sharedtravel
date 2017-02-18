@@ -21,7 +21,11 @@ export class UserEffects {
             return Observable.fromPromise(this.af.auth.login({provider: AuthProviders.Facebook}))
                 .map( (user: any) => {
                     console.log('logged in user', user)
-                    this.store.dispatch(new UpdateUserAction(user));
+                    let newUser:User;
+                    newUser.uid = user.uid;
+                    newUser.photoURL = user.photoURL;
+                    newUser.displayName = user.displayName;
+                    this.store.dispatch(new UpdateUserAction(newUser));
                     return new user.LogInSuccessAction()
                 })
                 .catch( (res: any) => of(new userActions.LogInFailedAction()));
