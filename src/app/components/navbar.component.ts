@@ -16,32 +16,23 @@ import {LogOutAction} from "../actions/user";
     styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-    user = {};
+    loggedInUser:User = undefined;
     constructor(
-        private store: Store<fromRoot.State>,
-        public af: AngularFire
+        private store: Store<fromRoot.State>
     ) {
-        this.af.auth.subscribe(user => {
-            if(user) {
-                // user logged in
-                this.user = user;
-                console.log(this.user);
-            }
-            else {
-                // user not logged in
-                this.user = undefined;
-            }
-        });
+        this.store.select(fromRoot.getUser).subscribe(user => {
+            this.loggedInUser = user;
+        })
     }
 
     login() {
         this.store.dispatch(new LogInAction());
-        console.log(this.user);
+        console.log(this.loggedInUser);
     }
 
     logout() {
         console.log('logout clicked');
         this.store.dispatch(new LogOutAction());
-        console.log(this.user);
+        console.log(this.loggedInUser);
     }
 }

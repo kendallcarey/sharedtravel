@@ -17,7 +17,7 @@ export const ActionTypes = {
     LOG_OUT_SUCCESS: type('[User] Log Out Success'),
     LOG_IN_FAILED: type('[User] Log In Failed'),
     LOG_OUT_FAILED: type('[User] Log Out Failed'),
-    UPDATE_USER: type('[User] Update User')
+    UPDATE_USER: type('[User] Update User'),
 };
 
 /**
@@ -65,9 +65,8 @@ export class LogOutFailedAction implements Action {
 export class UpdateUserAction implements Action {
     type = ActionTypes.UPDATE_USER;
 
-    constructor(public payload: User) { }
+    constructor(public payload: User) {}
 }
-
 //
 // export class AddPackingListAction implements Action {
 //     type = ActionTypes.ADD_PACKING_LIST;

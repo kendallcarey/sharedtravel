@@ -62,6 +62,7 @@ export interface State {
  */
 const reducers = {
   packingList: fromPackingList.reducer,
+  user: fromUser.reducer
 };
 
 const developmentReducer: ActionReducer<State> = compose(
