@@ -20,11 +20,11 @@ export class UserEffects {
             console.log('do login');
             return Observable.fromPromise(this.af.auth.login({provider: AuthProviders.Facebook}))
                 .map( (user: any) => {
-                    console.log('logged in user', user)
-                    let newUser:User;
-                    newUser.uid = user.uid;
-                    newUser.photoURL = user.photoURL;
-                    newUser.displayName = user.displayName;
+                    console.log('logged in user', user);
+                    let newUser:User = new User();
+                    newUser.uid = user.uid; //dies here, figure out why
+                    newUser.photoURL = user.auth.photoURL;
+                    newUser.displayName = user.auth.displayName;
                     this.store.dispatch(new UpdateUserAction(newUser));
                     return new user.LogInSuccessAction()
                 })
