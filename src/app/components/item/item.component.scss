@@ -1,0 +1,26 @@
+a {
+  opacity: 0;
+}
+p{
+  font-family: Arial;
+  font-size:24px;
+}
+p:hover{
+  a{
+    opacity:1;
+    color:#23527c;
+  }
+  a:hover{
+    color: #112a3f;
+  }
+}
+
+input.edit-item {
+  color: #666666;
+  -webkit-border-radius:25px;
+  -moz-border-radius:25px;
+  border-radius:25px;
+  padding-left:10px;
+  height:30px;
+}
+

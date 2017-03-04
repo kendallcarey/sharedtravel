@@ -1,0 +1,9 @@
+<div #eachItem *ngIf="packingList">
+    <p *ngIf="!edit">
+        {{ packingList.name }} <a href="#" (click)="editPackingList()" >Edit</a> <a href="#" (click)="deletePackingList(packingList)">Delete</a></p>
+    <input type="text" class="edit-packingList" *ngIf="edit" (keydown.enter)="makeChanges(editedPackingList.value)" #editedPackingList [value]="packingList.name">
+</div>
+<div class="packing-list" *ngIf="packingList">
+    <h2><a routerLink="/packing-list" routerLinkActive="active" *ngIf="loggedInUser">{{loggedInUser.displayName}}'s </a>Packing List</h2>
+    <packing-list></packing-list>
+</div>
