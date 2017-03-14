@@ -1,8 +1,22 @@
 .packing-list {
   background:rgba(0,0,0,.5);
-  margin-top:100px;
   padding-top:5px;
   padding-left: 30px;
   height: 75px;
   width:100%;
+  margin-top:20px;
+  cursor: pointer;
+}
+.packing-list h2 {
+  float: left;
+}
+.packing-list p {
+  float: right;
+  margin-right:10px;
+  margin-top:20px;
+}
+h1 {
+  color: rgba(0, 0, 0, 0.3);
+  font-family: VarianeScript;
+  font-size:40px;
 }
