@@ -20,6 +20,8 @@ import {NavbarComponent} from "./components/navbar/navbar.component";
 import {UserEffects} from "./store/user/user.effects";
 import {CreatePackingListComponent} from "./components/create-packing-list/create-packing-list.component";
 import {AllPackingListsComponent} from "./components/all-packing-lists/all-packing-lists.component";
+import {PackingListRoutingModule} from "./components/packing-list/packing-list-routing.module";
+import {AppRoutingModule} from "./app-routing.module";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBpm4T0czdn-NBqXMWiNBJnRQeOt7dHD9c",
@@ -33,15 +35,8 @@ const FirebaseAuthConfig = {
   method: AuthMethods.Popup
 };
 
-// const appRoutes: Routes = [
-//   { path: '', component: AppComponent},
-//   { path: 'packing-list/:id', component: PackingListComponent },
-//   // { path: '**', component: PageNotFoundComponent }
-// ];
-
 @NgModule({
   imports: [
-    // RouterModule.forRoot(appRoutes),
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig, FirebaseAuthConfig),
     StoreModule.provideStore(reducer),
@@ -58,7 +53,9 @@ const FirebaseAuthConfig = {
      *
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
-    StoreDevtoolsModule.instrumentOnlyWithExtension()
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    AppRoutingModule,
+    PackingListRoutingModule
   ],
   declarations: [
     AppComponent,
