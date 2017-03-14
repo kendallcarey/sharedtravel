@@ -39,7 +39,7 @@ import { combineReducers } from '@ngrx/store';
  * notation packages up all of the exports into a single object.
  */
 
-import * as fromPackingList from './packing-list/packing-list.reducer';
+import * as fromPackingLists from './packing-list/packing-list.reducer';
 import * as fromUser from './user/user.reducer';
 
 
@@ -48,7 +48,7 @@ import * as fromUser from './user/user.reducer';
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
-  packingList: fromPackingList.State;
+  packingLists: fromPackingLists.State;
   user: fromUser.State;
 }
 
@@ -61,7 +61,7 @@ export interface State {
  * the result from right to left.
  */
 const reducers = {
-  packingList: fromPackingList.reducer,
+  packingLists: fromPackingLists.reducer,
   user: fromUser.reducer
 };
 
@@ -85,9 +85,9 @@ export function reducer(state: any, action: any) {
 }
 
 
-export const getPackingListsState = (state: State) => state.packingList;
+export const getPackingListsState = (state: State) => state.packingLists;
 
-export const getPackingLists = createSelector(getPackingListsState, fromPackingList.getPackingLists);
+export const getPackingLists = createSelector(getPackingListsState, fromPackingLists.getPackingLists);
 
 export const getUserState = (state: State) => state.user;
 

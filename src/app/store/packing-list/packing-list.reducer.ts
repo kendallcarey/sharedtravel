@@ -20,12 +20,6 @@ export function reducer(state = initialState, action: packingList.Actions): Stat
                 packingLists: (<packingList.UpdatePackingListsAction>action).payload
 
             };
-        // case packingList.ActionTypes.UPDATE_PACKING_LIST:
-        //         return {
-        //             packingList: [
-        //                 items: action.payload
-        //             ]
-        //         };
         default:
             return state;
     }

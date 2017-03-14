@@ -1,4 +1,4 @@
-import { Component,ViewChild, ElementRef } from '@angular/core';
+import { Component,ViewChild, ElementRef, Input } from '@angular/core';
 import { Logger } from 'angular2-logger/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -14,9 +14,10 @@ import {AddItemAction} from "../../store/packing-list/packing-list.actions";
 })
 export class PackingListComponent {
     @ViewChild('newitem') newItem: ElementRef;
-    packingList$ : Observable<PackingList[]>;
-    constructor(private store: Store<fromRoot.State>, private packingList: PackingListService) {
-        this.packingList$ = store.select(fromRoot.getPackingLists);
+    @Input()
+    packingList:PackingList;
+    constructor(private store: Store<fromRoot.State>) {
+        // this.packingList$ = store.select(fromRoot.getPackingLists);
     }
     addNew(item: string) {
         this.store.dispatch(new AddItemAction(item));
