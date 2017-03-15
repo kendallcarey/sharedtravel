@@ -13,6 +13,7 @@
                 </button>
             </div>
             <div *ngIf="loggedInUser" class="navbar-buttons">
+                <h4>Safe Travels {{ loggedInUser.displayName }}</h4>
                 <a href="#"><img [src]="loggedInUser.photoURL" class="fb-image"></a>
                 <button md-raised-button class="btn btn-default navbar-btn" (click)="logout()">
                     Logout

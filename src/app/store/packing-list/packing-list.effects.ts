@@ -76,4 +76,36 @@ export class PackingListEffects {
                 })
                 .catch( (res: any) => of(new packingList.PackingListUpdateFailedAction()));
         });
+    @Effect()
+    newPL$: Observable<Action> = this.actions$
+        .ofType(packingList.ActionTypes.ADD_PACKING_LIST)
+        .map((action: packingList.AddPackingListAction) => action.payload)
+        .switchMap(pl => {
+            if (pl === '') {
+                return of(new packingList.PackingListUpdateFailedAction());
+            }
+
+            return Observable.fromPromise(this.af.database.list('packingLists/').push({ name: pl}))
+                .map( (res: any) => {
+                    console.log('map from return of push', res)
+                    return new packingList.PackingListUpdateSuccessAction()
+                })
+                .catch( (res: any) => of(new packingList.PackingListUpdateFailedAction()));
+        });
+    @Effect()
+    editedPL$: Observable<Action> = this.actions$
+        .ofType(packingList.ActionTypes.EDIT_PACKING_LIST)
+        .map((action: packingList.EditPackingListAction) => action.payload)
+        .switchMap(pl => {
+            if(pl == null) {
+                return of(new packingList.PackingListUpdateFailedAction());
+            }
+            pl = Object.assign({}, pl, {name: pl.newName})
+            console.log('packingList: ', pl.oldPackingList)
+            return Observable.fromPromise(this.af.database.list('packingLists/').update(pl.oldPackingList.$key, {name: pl.newName}))
+                .map( (res: any) => {
+                    return new packingList.PackingListUpdateSuccessAction()
+                })
+                .catch( (res: any) => of(new packingList.PackingListUpdateFailedAction()));
+        });
 }

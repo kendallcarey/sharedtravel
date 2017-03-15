@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {AllPackingListsComponent} from "./components/all-packing-lists/all-packing-lists.component";
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'packing-list', redirectTo: 'packing-list', pathMatch: 'full' }
+  { path: '', component: AllPackingListsComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

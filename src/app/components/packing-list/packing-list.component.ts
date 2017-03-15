@@ -1,4 +1,5 @@
 import { Component,ViewChild, ElementRef, Input } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Logger } from 'angular2-logger/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -13,15 +14,17 @@ import {AddItemAction} from "../../store/packing-list/packing-list.actions";
     styleUrls: ['./packing-list.component.scss']
 })
 export class PackingListComponent {
-    @ViewChild('newitem') newItem: ElementRef;
     @Input()
     packingList:PackingList;
-    constructor(private store: Store<fromRoot.State>) {
-        // this.packingList$ = store.select(fromRoot.getPackingLists);
-    }
-    addNew(item: string) {
-        this.store.dispatch(new AddItemAction(item));
-        this.newItem.nativeElement.value = '';
+    private selectedId: number;
+    constructor(
+        private store: Store<fromRoot.State>,
+        private service: PackingListService,
+        private route: ActivatedRoute,
+        private router: Router) {
     }
 
+    onSelect(packingList:PackingList) {
+        this.router.navigate(['/packing-list', packingList.$key]);
+    }
 }

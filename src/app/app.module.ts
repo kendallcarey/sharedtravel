@@ -22,6 +22,8 @@ import {CreatePackingListComponent} from "./components/create-packing-list/creat
 import {AllPackingListsComponent} from "./components/all-packing-lists/all-packing-lists.component";
 import {PackingListRoutingModule} from "./components/packing-list/packing-list-routing.module";
 import {AppRoutingModule} from "./app-routing.module";
+import {PackingListDetailComponent} from "./components/packing-list-detail/packing-list-detail.component";
+import {PackingListModule} from "./components/packing-list/packing-list.module";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBpm4T0czdn-NBqXMWiNBJnRQeOt7dHD9c",
@@ -54,21 +56,19 @@ const FirebaseAuthConfig = {
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
-    AppRoutingModule,
-    PackingListRoutingModule
+    PackingListModule,
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,
     PackingListComponent,
-    ItemComponent,
     NavbarComponent,
     CreatePackingListComponent,
     AllPackingListsComponent
   ],
   bootstrap: [AppComponent],
   providers: [
-      LOG_LOGGER_PROVIDERS,
-      PackingListService
+      LOG_LOGGER_PROVIDERS
 
   ]
 })

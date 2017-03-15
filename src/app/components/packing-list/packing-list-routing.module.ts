@@ -1,11 +1,12 @@
 import { NgModule }            from '@angular/core';
 import { RouterModule }        from '@angular/router';
 
-import { PackingListComponent}    from './packing-list.component';
+import { PackingListDetailComponent}    from '../packing-list-detail/packing-list-detail.component';
+import { PackingListService }      from '../../store/packing-list/packing-list.service'
 
 @NgModule({
     imports: [RouterModule.forChild([
-        { path: 'packing-list', component: PackingListComponent }
+        { path: 'packing-list/:id', component: PackingListDetailComponent }
     ])],
     exports: [RouterModule]
 })

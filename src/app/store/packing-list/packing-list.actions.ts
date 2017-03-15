@@ -18,7 +18,7 @@ export const ActionTypes = {
     DELETE_ITEM: type('[Packing-List] Delete Item'),
     UPDATE_PACKING_LIST_CONTENTS_FAILED: type('[Packing-List] Update Failed'),
     UPDATE_PACKING_LIST_CONTENTS_SUCCESS: type('[Packing-List] Update Success'),
-    // UPDATE_PACKING_LIST: type('[Packing-List] Update Packing List'),
+    EDIT_PACKING_LIST: type('[Packing-List] Edit Packing List'),
     UPDATE_PACKING_LISTS: type('[Packing-List] Update Packing Lists'),
     ADD_PACKING_LIST: type('[Packing-List] Add Packing List'),
     DELETE_PACKING_LIST: type('[Packing-List] delete Packing List')
@@ -66,14 +66,14 @@ export class PackingListUpdateSuccessAction implements Action {
 
     constructor() {}
 }
-//
-// export class UpdatePackingListAction implements Action {
-//     type = ActionTypes.UPDATE_PACKING_LIST;
-//
-//     constructor(public payload:Item[]) {
-//
-//     }
-// }
+
+export class EditPackingListAction implements Action {
+    type = ActionTypes.EDIT_PACKING_LIST;
+
+    constructor(public payload:{newName:string, oldPackingList:PackingList}) {
+
+    }
+}
 
 export class UpdatePackingListsAction implements Action {
     type = ActionTypes.UPDATE_PACKING_LISTS;
@@ -86,7 +86,7 @@ export class UpdatePackingListsAction implements Action {
 export class AddPackingListAction implements Action {
     type = ActionTypes.ADD_PACKING_LIST;
 
-    constructor() {
+    constructor(public payload:string) {
 
     }
 }
@@ -109,7 +109,7 @@ export type Actions
     |  DeleteItemAction
     |  PackingListUpdateFailedAction
     |  PackingListUpdateSuccessAction
-    // |  UpdatePackingListAction
+    |  EditPackingListAction
     |  UpdatePackingListsAction
     |  AddPackingListAction
     |  DeletePackingListAction;
