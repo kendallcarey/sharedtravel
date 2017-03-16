@@ -1,2 +1,5 @@
-<h2 (click)="onSelect(packingList)">{{ packingList.name }}</h2>
-<!--include edit and delete here-->
+<div>
+    <h2 (click)="onSelect(packingList)">{{ packingList.name }}</h2>
+    <p><a href="#" (click)="editPL()" >Edit</a> | <a href="#" (click)="deletePL(pl)">Delete</a></p>
+    <input type="text" class="edit-pl" *ngIf="edit" (keydown.enter)="makeChanges(editedPL.value)" #editedPL [value]="packingList.name">
+</div>

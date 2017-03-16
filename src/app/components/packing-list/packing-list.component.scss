@@ -1,4 +1,4 @@
-h2 {
+div {
   background:rgba(0,0,0,.5);
   padding-top:5px;
   padding-left: 30px;
@@ -6,4 +6,13 @@ h2 {
   width:100%;
   margin-top:20px;
   cursor: pointer;
+  display: block;
+}
+
+h2 {
+  float: left;
+}
+
+p {
+  float: right;
 }
