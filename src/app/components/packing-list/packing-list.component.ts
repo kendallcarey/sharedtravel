@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from '../../store/.';
 import {PackingList} from "../../store/packing-list/packing-list.model";
 import { PackingListService } from '../../store/packing-list/packing-list.service'
-import {EditPackingListAction} from "../../store/packing-list/packing-list.actions";
+import {EditPackingListAction, DeletePackingListAction} from "../../store/packing-list/packing-list.actions";
 
 @Component({
     selector: 'packing-list',
@@ -37,7 +37,7 @@ export class PackingListComponent {
         this.store.dispatch(new EditPackingListAction({newName:pl, oldPackingList:this.packingList}));
     }
 
-    // deletePackingList(packingList:PackingList) {
-    //     this.store.dispatch(new DeletePackingListAction(packingList));
-    // }
+    deletePL(packingList:PackingList) {
+        this.store.dispatch(new DeletePackingListAction(packingList));
+    }
 }

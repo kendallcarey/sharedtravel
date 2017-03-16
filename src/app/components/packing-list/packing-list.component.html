@@ -1,5 +1,5 @@
 <div>
     <h2 (click)="onSelect(packingList)" *ngIf="!edit">{{ packingList.name }}</h2>
-    <p *ngIf="!edit"><a href="#" (click)="editPL()" >Edit</a> | <a href="#" (click)="deletePL(pl)">Delete</a></p>
+    <p *ngIf="!edit"><a href="#" (click)="editPL()" >Edit</a> | <a href="#" (click)="deletePL(packingList)">Delete</a></p>
     <input type="text" class="edit-pl" *ngIf="edit" (keydown.enter)="makeChanges(editedPL.value)" #editedPL [value]="packingList.name">
 </div>

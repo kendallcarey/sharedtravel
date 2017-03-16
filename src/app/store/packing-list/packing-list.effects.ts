@@ -12,7 +12,7 @@ export class PackingListEffects {
     constructor(private actions$: Actions, private af: AngularFire) { }
 
     @Effect()
-    load$: Observable<Action> = this.actions$
+    loadItem$: Observable<Action> = this.actions$
         .ofType(packingList.ActionTypes.ADD_ITEM)
         .map((action: packingList.AddItemAction) => action.payload)
         .switchMap(query => {
@@ -29,7 +29,7 @@ export class PackingListEffects {
         });
 
     @Effect()
-    completed$: Observable<Action> = this.actions$
+    completedItem$: Observable<Action> = this.actions$
         .ofType(packingList.ActionTypes.ITEM_COMPLETED)
         .map((action: packingList.ItemCompletedAction) => action.payload)
         .switchMap(item => {
@@ -45,7 +45,7 @@ export class PackingListEffects {
         });
 
     @Effect()
-    edited$: Observable<Action> = this.actions$
+    editedItem$: Observable<Action> = this.actions$
         .ofType(packingList.ActionTypes.EDIT_ITEM)
         .map((action: packingList.EditItemAction) => action.payload)
         .switchMap(item => {
@@ -62,7 +62,7 @@ export class PackingListEffects {
         });
 
     @Effect()
-    deleted$: Observable<Action> = this.actions$
+    deletedItem$: Observable<Action> = this.actions$
         .ofType(packingList.ActionTypes.DELETE_ITEM)
         .map((action: packingList.DeleteItemAction) => action.payload)
         .switchMap(item => {
@@ -103,6 +103,21 @@ export class PackingListEffects {
             pl = Object.assign({}, pl, {name: pl.newName})
             console.log('packingList: ', pl.oldPackingList)
             return Observable.fromPromise(this.af.database.list('packingLists/').update(pl.oldPackingList.$key, {name: pl.newName}))
+                .map( (res: any) => {
+                    return new packingList.PackingListUpdateSuccessAction()
+                })
+                .catch( (res: any) => of(new packingList.PackingListUpdateFailedAction()));
+        });
+    @Effect()
+    deletedPL$: Observable<Action> = this.actions$
+        .ofType(packingList.ActionTypes.DELETE_PACKING_LIST)
+        .map((action: packingList.DeletePackingListAction) => action.payload)
+        .switchMap(pl => {
+            if(pl == null) {
+                return of(new packingList.PackingListUpdateFailedAction());
+            }
+            console.log('packingList: ', pl)
+            return Observable.fromPromise(this.af.database.list('packingLists/').remove(pl.$key))
                 .map( (res: any) => {
                     return new packingList.PackingListUpdateSuccessAction()
                 })
