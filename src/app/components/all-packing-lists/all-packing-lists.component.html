@@ -1,4 +1,4 @@
-<div #eachItem *ngIf="packingLists !== [] && !selectedPackingList">
+<div #eachItem *ngIf="packingLists !== []">
     <h1>All Packing Lists</h1>
     <input type="text" class="packing-list-input" placeholder="Create New Packing List" #newPL (keydown.enter)="addNew(newPL.value)">
         <div *ngFor="let list of packingLists" class="packing-list" (click)="selectPackingList()">

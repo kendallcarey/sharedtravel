@@ -5,14 +5,23 @@ div {
   height: 75px;
   width:100%;
   margin-top:20px;
-  cursor: pointer;
   display: block;
 }
 
 h2 {
   float: left;
+  cursor: pointer;
 }
 
 p {
   float: right;
+}
+
+input.edit-pl {
+  color: #666666;
+  -webkit-border-radius:25px;
+  -moz-border-radius:25px;
+  border-radius:25px;
+  padding-left:10px;
+  height:30px;
 }
