@@ -72,7 +72,7 @@ export class PackingListEffects {
             }
             console.log('item: ', item)
             console.log('packingLists/'+ item.packingList.$key +'/items/')
-            return Observable.fromPromise(this.af.database.list('packingLists/'+ item.packingList.$key +'items/').remove(item.item.$key))
+            return Observable.fromPromise(this.af.database.list('packingLists/'+ item.packingList.$key +'/items/').remove(item.item.$key))
                 .map( (res: any) => {
                     return new packingList.PackingListUpdateSuccessAction()
                 })
