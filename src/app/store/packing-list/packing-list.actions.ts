@@ -34,25 +34,25 @@ export const ActionTypes = {
 export class AddItemAction implements Action {
     type = ActionTypes.ADD_ITEM;
 
-    constructor(public payload: string) { }
+    constructor(public payload: {name: string, packingList:PackingList}) { }
 }
 
 export class ItemCompletedAction implements Action {
     type = ActionTypes.ITEM_COMPLETED;
 
-    constructor(public payload:Item) { }
+    constructor(public payload:{item:Item, packingList:PackingList}) { }
 }
 
 export class EditItemAction implements Action {
     type = ActionTypes.EDIT_ITEM;
 
-    constructor(public payload:{newName:string, oldItem:Item}) { }
+    constructor(public payload:{newName:string, oldItem:Item, packingList:PackingList}) { }
 }
 
 export class DeleteItemAction implements Action {
     type = ActionTypes.DELETE_ITEM;
 
-    constructor(public payload:Item) { }
+    constructor(public payload:{item:Item, packingList:PackingList}) { }
 }
 
 export class PackingListUpdateFailedAction implements Action {

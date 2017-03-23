@@ -15,12 +15,12 @@ export class PackingListEffects {
     loadItem$: Observable<Action> = this.actions$
         .ofType(packingList.ActionTypes.ADD_ITEM)
         .map((action: packingList.AddItemAction) => action.payload)
-        .switchMap(query => {
-            if (query === '') {
+        .switchMap(newItem => {
+            if (newItem.name === '') {
                 return of(new packingList.PackingListUpdateFailedAction());
             }
 
-            return Observable.fromPromise(this.af.database.list('packingLists/myid/items/').push({ name: query, completed:false}))
+            return Observable.fromPromise(this.af.database.list('packingLists/'+ newItem.packingList.$key +'/items/').push({ name: newItem.name, completed:false}))
                 .map( (res: any) => {
                     console.log('map from return of push', res)
                     return new packingList.PackingListUpdateSuccessAction()
@@ -36,8 +36,9 @@ export class PackingListEffects {
             if(item == null) {
                 return of(new packingList.PackingListUpdateFailedAction());
             }
-            item = Object.assign({}, item, {completed: !item.completed})
-            return Observable.fromPromise(this.af.database.list('packingLists/myid/items/').update(item.$key, {completed: item.completed}))
+            item = Object.assign({}, item, {completed: !item.item.completed})
+            console.log('item', item)
+            return Observable.fromPromise(this.af.database.list('packingLists/'+ item.packingList.$key +'/items/').update(item.item.$key, {completed: !item.item.completed}))
                 .map( (res: any) => {
                     return new packingList.PackingListUpdateSuccessAction()
                 })
@@ -54,7 +55,7 @@ export class PackingListEffects {
             }
             item = Object.assign({}, item, {name: item.newName})
             console.log('item: ', item.oldItem)
-            return Observable.fromPromise(this.af.database.list('packingLists/myid/items/').update(item.oldItem.$key, {name: item.newName}))
+            return Observable.fromPromise(this.af.database.list('packingLists/'+ item.packingList.$key +'/items/').update(item.oldItem.$key, {name: item.newName}))
                 .map( (res: any) => {
                     return new packingList.PackingListUpdateSuccessAction()
                 })
@@ -70,7 +71,8 @@ export class PackingListEffects {
                 return of(new packingList.PackingListUpdateFailedAction());
             }
             console.log('item: ', item)
-            return Observable.fromPromise(this.af.database.list('packingLists/myid/items/').remove(item.$key))
+            console.log('packingLists/'+ item.packingList.$key +'/items/')
+            return Observable.fromPromise(this.af.database.list('packingLists/'+ item.packingList.$key +'items/').remove(item.item.$key))
                 .map( (res: any) => {
                     return new packingList.PackingListUpdateSuccessAction()
                 })

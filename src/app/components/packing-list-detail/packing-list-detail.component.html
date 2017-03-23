@@ -3,6 +3,6 @@
     <h2>{{ packingList.name }}</h2>
     <input type="text" class="packing-list-input" placeholder="Type Item" #newitem (keydown.enter)="addNew(newitem.value)">
     <div class="list-of-items">
-        <item  *ngFor="let item of packingList.items" [item]="item"></item>
+        <item  *ngFor="let item of packingList.items" [item]="item" [packingList]="packingList"></item>
     </div>
 </div>

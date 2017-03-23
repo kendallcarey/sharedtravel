@@ -35,8 +35,8 @@ export class PackingListDetailComponent implements OnInit {
         this.router.navigate(['/']);
     }
 
-    addNew(item: string) {
-        this.store.dispatch(new AddItemAction(item));
+    addNew(itemName: string) {
+        this.store.dispatch(new AddItemAction({name:itemName, packingList:this.packingList}));
         this.newItem.nativeElement.value = '';
     }
 }

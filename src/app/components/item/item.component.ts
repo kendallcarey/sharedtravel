@@ -17,22 +17,23 @@ export class ItemComponent {
     item:Item;
     @ViewChild('itemCheckbox') itemCheckbox: ElementRef;
     edit:boolean = false;
-
+    @Input()
+    packingList:PackingList;
     constructor(private store: Store<fromRoot.State>) {
         // this.item = store.select(fromRoot.getPackingList);
     }
 
     statusComplete(item: Item) {
-        this.store.dispatch(new ItemCompletedAction(item));
+        this.store.dispatch(new ItemCompletedAction({item:item, packingList:this.packingList}));
     }
 
     editItem() {
         this.edit = !this.edit;
     }
     makeChanges(item:string) {
-        this.store.dispatch(new EditItemAction({newName:item, oldItem:this.item}));
+        this.store.dispatch(new EditItemAction({newName:item, oldItem:this.item, packingList:this.packingList}));
     }
     deleteItem(item:Item) {
-        this.store.dispatch(new DeleteItemAction(item));
+        this.store.dispatch(new DeleteItemAction({item:item, packingList:this.packingList}));
     }
 }
