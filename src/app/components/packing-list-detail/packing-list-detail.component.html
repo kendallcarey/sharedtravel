@@ -1,5 +1,5 @@
 <div class="packing-list" *ngIf="packingList">
-    <h4 (click)="gotoAllLists()">< Back lists</h4>
+    <h4 (click)="gotoAllLists()">< Back to lists</h4>
     <h2>{{ packingList.name }}</h2>
     <input type="text" class="packing-list-input" placeholder="Type Item" #newitem (keydown.enter)="addNew(newitem.value)">
     <div class="list-of-items">

@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { type } from '../util';
-import {Item} from "../item/item.model";
-import {PackingList} from "./packing-list.model";
+import { Item } from '../item/item.model';
+import { PackingList } from './packing-list.model';
 
 /**
  * For each action type in an action group, make a simple
@@ -11,7 +11,7 @@ import {PackingList} from "./packing-list.model";
  * literal types and runs a simple check to guarantee all
  * action types in the application are unique.
  */
-export const ActionTypes = {
+export const actionTypes = {
     ADD_ITEM:  type('[Packing-List] Add Item'),
     ITEM_COMPLETED: type('[Packing-List] Completed Item'),
     EDIT_ITEM: type('[Packing-List] Edit Item'),
@@ -29,72 +29,73 @@ export const ActionTypes = {
  * payload. Expressing actions as classes enables powerful
  * type checking in reducer functions.
  *
- * See Discriminated Unions: https://www.typescriptlang.org/docs/handbook/advanced-types.html#discriminated-unions
+ * See Discriminated Unions:
+ * https://www.typescriptlang.org/docs/handbook/advanced-types.html#discriminated-unions
  */
 export class AddItemAction implements Action {
-    type = ActionTypes.ADD_ITEM;
+    type = actionTypes.ADD_ITEM;
 
-    constructor(public payload: {name: string, packingList:PackingList}) { }
+    constructor(public payload: {name: string, packingList: PackingList}) { }
 }
 
 export class ItemCompletedAction implements Action {
-    type = ActionTypes.ITEM_COMPLETED;
+    type = actionTypes.ITEM_COMPLETED;
 
-    constructor(public payload:{item:Item, packingList:PackingList}) { }
+    constructor(public payload: {item: Item, packingList: PackingList}) { }
 }
 
 export class EditItemAction implements Action {
-    type = ActionTypes.EDIT_ITEM;
+    type = actionTypes.EDIT_ITEM;
 
-    constructor(public payload:{newName:string, oldItem:Item, packingList:PackingList}) { }
+    constructor(public payload: {newName: string, oldItem: Item, packingList: PackingList}) { }
 }
 
 export class DeleteItemAction implements Action {
-    type = ActionTypes.DELETE_ITEM;
+    type = actionTypes.DELETE_ITEM;
 
-    constructor(public payload:{item:Item, packingList:PackingList}) { }
+    constructor(public payload: {item: Item, packingList: PackingList}) { }
 }
 
 export class PackingListUpdateFailedAction implements Action {
-    type = ActionTypes.UPDATE_PACKING_LIST_CONTENTS_FAILED;
+    type = actionTypes.UPDATE_PACKING_LIST_CONTENTS_FAILED;
 
     constructor() {}
 }
 
 export class PackingListUpdateSuccessAction implements Action {
-    type = ActionTypes.UPDATE_PACKING_LIST_CONTENTS_SUCCESS;
+    type = actionTypes.UPDATE_PACKING_LIST_CONTENTS_SUCCESS;
 
     constructor() {}
 }
 
 export class EditPackingListAction implements Action {
-    type = ActionTypes.EDIT_PACKING_LIST;
+    type = actionTypes.EDIT_PACKING_LIST;
 
-    constructor(public payload:{newName:string, oldPackingList:PackingList}) {
+    constructor(public payload: {newName: string, oldPackingList: PackingList}) {
 
     }
 }
 
 export class UpdatePackingListsAction implements Action {
-    type = ActionTypes.UPDATE_PACKING_LISTS;
+    type = actionTypes.UPDATE_PACKING_LISTS;
 
-    constructor(public payload:PackingList[]) {
+    constructor(public payload: PackingList[]) {
 
     }
 }
 
 export class AddPackingListAction implements Action {
-    type = ActionTypes.ADD_PACKING_LIST;
+    type = actionTypes.ADD_PACKING_LIST;
 
-    constructor(public payload:string) {
+    constructor(public payload: string) {
 
     }
 }
 
 export class DeletePackingListAction implements Action {
-    type = ActionTypes.DELETE_PACKING_LIST;
+    type = actionTypes.DELETE_PACKING_LIST;
 
-    constructor(public payload:PackingList) {
+    constructor(public payload: PackingList) {
 
     }
 }

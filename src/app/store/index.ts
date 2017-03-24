@@ -76,10 +76,9 @@ const productionReducer: ActionReducer<State> = compose(
 )(reducers);
 
 export function reducer(state: any, action: any) {
-  if (process.env.ENV == 'production') {
+  if (process.env.ENV === 'production') {
     return productionReducer(state, action);
-  }
-  else {
+  } else {
     return developmentReducer(state, action);
   }
 }
@@ -87,7 +86,10 @@ export function reducer(state: any, action: any) {
 
 export const getPackingListsState = (state: State) => state.packingLists;
 
-export const getPackingLists = createSelector(getPackingListsState, fromPackingLists.getPackingLists);
+export const getPackingLists = createSelector(
+                                  getPackingListsState,
+                                  fromPackingLists.getPackingLists
+                                );
 
 export const getUserState = (state: State) => state.user;
 

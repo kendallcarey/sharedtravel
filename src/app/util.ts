@@ -2,7 +2,6 @@
  * This function coerces a string into a string literal type.
  * Using tagged union types in TypeScript 2.0, this enables
  * powerful typechecking of our reducers.
- * 
  * Since every action label passes through this function it
  * is a good place to ensure all of our action labels
  * are unique.
@@ -19,10 +18,10 @@ export function type<T>(label: T | ''): T {
   return <T>label;
 }
 export function makeid(): string {
-  let text = "";
-  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let text = '';
+  let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-  for (let i=0; i < 5; i++) {
+  for (let i = 0; i < 5; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
 

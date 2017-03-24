@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LOG_LOGGER_PROVIDERS } from 'angular2-logger/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Store, StoreModule, combineReducers } from '@ngrx/store';
-import { getPackingLists } from './store/packing-list/packing-list.reducer';
 import { compose } from '@ngrx/core/compose';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
@@ -11,28 +10,23 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 
 import { AppComponent } from './app.component';
 import {reducer} from './store';
-import {PackingListComponent} from "./components/packing-list/packing-list.component";
-import {ItemComponent} from "./components/item/item.component";
+import {PackingListComponent} from './components/packing-list/packing-list.component';
 import { EffectsModule } from '@ngrx/effects';
-import {PackingListEffects} from "./store/packing-list/packing-list.effects";
-import {PackingListService} from "./store/packing-list/packing-list.service";
-import {NavbarComponent} from "./components/navbar/navbar.component";
-import {UserEffects} from "./store/user/user.effects";
-import {CreatePackingListComponent} from "./components/create-packing-list/create-packing-list.component";
-import {AllPackingListsComponent} from "./components/all-packing-lists/all-packing-lists.component";
-import {PackingListRoutingModule} from "./components/packing-list/packing-list-routing.module";
-import {AppRoutingModule} from "./app-routing.module";
-import {PackingListDetailComponent} from "./components/packing-list-detail/packing-list-detail.component";
-import {PackingListModule} from "./components/packing-list/packing-list.module";
+import {PackingListEffects} from './store/packing-list/packing-list.effects';
+import {NavbarComponent} from './components/navbar/navbar.component';
+import {UserEffects} from './store/user/user.effects';
+import {AllPackingListsComponent} from './components/all-packing-lists/all-packing-lists.component';
+import {AppRoutingModule} from './app-routing.module';
+import {PackingListModule} from './components/packing-list/packing-list.module';
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyBpm4T0czdn-NBqXMWiNBJnRQeOt7dHD9c",
-  authDomain: "share-adventure.firebaseapp.com",
-  databaseURL: "https://share-adventure.firebaseio.com",
-  storageBucket: "share-adventure.appspot.com",
-  messagingSenderId: "502666566213"
+  apiKey: 'AIzaSyBpm4T0czdn-NBqXMWiNBJnRQeOt7dHD9c',
+  authDomain: 'share-adventure.firebaseapp.com',
+  databaseURL: 'https://share-adventure.firebaseio.com',
+  storageBucket: 'share-adventure.appspot.com',
+  messagingSenderId: '502666566213'
 };
-const FirebaseAuthConfig = {
+const firebaseAuthConfig = {
   provider: AuthProviders.Facebook,
   method: AuthMethods.Popup
 };
@@ -40,7 +34,7 @@ const FirebaseAuthConfig = {
 @NgModule({
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(firebaseConfig, FirebaseAuthConfig),
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     StoreModule.provideStore(reducer),
     EffectsModule.run(PackingListEffects),
     EffectsModule.run(UserEffects),
@@ -63,7 +57,6 @@ const FirebaseAuthConfig = {
     AppComponent,
     PackingListComponent,
     NavbarComponent,
-    CreatePackingListComponent,
     AllPackingListsComponent
   ],
   bootstrap: [AppComponent],

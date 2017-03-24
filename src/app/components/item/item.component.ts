@@ -1,11 +1,13 @@
-import { Component, Input,ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { Logger } from 'angular2-logger/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../store/.';
-import {PackingList} from "../../store/packing-list/packing-list.model";
-import {AddItemAction, ItemCompletedAction, EditItemAction, DeleteItemAction} from "../../store/packing-list/packing-list.actions";
-import {Item} from "../../store/item/item.model";
+import { PackingList } from '../../store/packing-list/packing-list.model';
+import { ItemCompletedAction } from '../../store/packing-list/packing-list.actions';
+import { EditItemAction } from '../../store/packing-list/packing-list.actions';
+import { DeleteItemAction } from '../../store/packing-list/packing-list.actions';
+import { Item } from '../../store/item/item.model';
 
 @Component({
     selector: 'item',
@@ -14,26 +16,36 @@ import {Item} from "../../store/item/item.model";
 })
 export class ItemComponent {
     @Input()
-    item:Item;
+    item: Item;
     @ViewChild('itemCheckbox') itemCheckbox: ElementRef;
-    edit:boolean = false;
+    edit: boolean = false;
     @Input()
-    packingList:PackingList;
+    packingList: PackingList;
     constructor(private store: Store<fromRoot.State>) {
         // this.item = store.select(fromRoot.getPackingList);
     }
 
     statusComplete(item: Item) {
-        this.store.dispatch(new ItemCompletedAction({item:item, packingList:this.packingList}));
+        this.store.dispatch(new ItemCompletedAction({
+                                    item: item,
+                                    packingList: this.packingList
+                                }));
     }
 
     editItem() {
         this.edit = !this.edit;
     }
-    makeChanges(item:string) {
-        this.store.dispatch(new EditItemAction({newName:item, oldItem:this.item, packingList:this.packingList}));
+    makeChanges(item: string) {
+        this.store.dispatch(new EditItemAction({
+                                    newName: item,
+                                    oldItem: this.item,
+                                    packingList: this.packingList
+                                }));
     }
-    deleteItem(item:Item) {
-        this.store.dispatch(new DeleteItemAction({item:item, packingList:this.packingList}));
+    deleteItem(item: Item) {
+        this.store.dispatch(new DeleteItemAction({
+                                    item: item,
+                                    packingList: this.packingList
+                                }));
     }
 }

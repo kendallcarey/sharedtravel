@@ -1,8 +1,8 @@
-import {PackingList} from "../packing-list/packing-list.model";
+import { Trip } from '../trip/trip.model';
 
 export class User {
     uid: string;
     displayName: string;
     photoURL: string;
-    packingLists: PackingList[] = [];
+    trips: Trip[] = [];
 }

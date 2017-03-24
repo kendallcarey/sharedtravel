@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromRoot from './store/.';
 import '../sass/styles.scss';
-import {User} from "./store/user/user.model";
+import {User} from './store/user/user.model';
 
 interface AppState {
   logger: string[];
@@ -16,7 +16,7 @@ interface AppState {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  loggedInUser:User = undefined;
+  loggedInUser: User = undefined;
   packingList = false;
   constructor(
       private store: Store<fromRoot.State>
@@ -24,6 +24,6 @@ export class AppComponent {
     this.store.select(fromRoot.getUser).subscribe(user => {
       console.log(user);
       this.loggedInUser = user;
-    })
+    });
   }
 }
